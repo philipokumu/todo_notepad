@@ -28,8 +28,13 @@ class _AddTaskState extends State<AddTask> {
                       horizontal: 16.0, vertical: 8.0),
                   child: Column(
                     children: [
+                      SizedBox(height: 20.0),
                       TextFormField(
-                        decoration: InputDecoration(hintText: 'Add title'),
+                        decoration: InputDecoration(
+                          labelText: 'Add title',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0)),
+                        ),
                         validator: (val) =>
                             val.isEmpty ? 'Enter a title' : null,
                         onSaved: (val) {
@@ -41,8 +46,10 @@ class _AddTaskState extends State<AddTask> {
                       TextFormField(
                         maxLines: null,
                         keyboardType: TextInputType.multiline,
-                        decoration:
-                            InputDecoration(hintText: 'Add description'),
+                        decoration: InputDecoration(
+                            hintText: 'Add description',
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none),
                         validator: (val) =>
                             val.isEmpty ? 'Enter a title' : null,
                         onSaved: (val) {
