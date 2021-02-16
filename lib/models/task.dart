@@ -14,4 +14,13 @@ class Task {
       'date': date.toIso8601String(),
     };
   }
+
+  factory Task.fromMap(Map<String, dynamic> map) {
+    return Task.withId(
+      id: map['id'],
+      title: map['title'],
+      description: map['description'],
+      date: DateTime.parse(['date']),
+    );
+  }
 }

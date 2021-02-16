@@ -50,13 +50,7 @@ class _AddTaskState extends State<AddTask> {
                           ),
                           FlatButton(
                             onPressed: () {
-                              if (_formKey.currentState.validate()) {
-                                _formKey.currentState.save();
-                                print(title);
-                                print(description);
-                                print(date);
-                                Navigator.pop(context);
-                              }
+                              Navigator.pop(context);
                             },
                             child: Text(
                               'Cancel',
