@@ -20,7 +20,7 @@ class Task {
       id: map['id'],
       title: map['title'],
       description: map['description'],
-      date: DateTime.parse(['date']),
+      date: DateTime.parse(map['date']),
     );
   }
 }

@@ -39,8 +39,8 @@ class DatabaseHelper {
 
   //Query function, for interacting with db
   Future<List<Map<String, dynamic>>> getTaskMapList() async {
-     Database db = await this.db;
-     final List<Map<String, dynamic>>> result = db.query(tasksTable);
+    Database db = await this.db;
+    final List<Map<String, dynamic>> result = await db.query(tasksTable);
     return result;
   }
 
@@ -48,31 +48,33 @@ class DatabaseHelper {
   Future<List<Task>> getTaskList() async {
     final List<Map<String, dynamic>> taskMapList = await getTaskMapList();
     final List<Task> taskList = [];
-    taskMapList.forEach((taskMap)) {
+    taskMapList.forEach((taskMap) {
       taskList.add(Task.fromMap(taskMap));
-    }
+    });
 
     return taskList;
   }
 
 // Insert into db
-  Future <int> insertTask(Task task) async {
+  Future<int> insertTask(Task task) async {
     Database db = await this.db;
-    final int result = await db.insert(tasksTable,task.toMap());
+    final int result = await db.insert(tasksTable, task.toMap());
     return result;
   }
 
 //Update db
-  Future <int> updateTask(Task task) async {
+  Future<int> updateTask(Task task) async {
     Database db = await this.db;
-    final int result = await db.update(tasksTable,task.toMap(),where: '$colId = ?', whereArgs: [task.id]);
+    final int result = await db.update(tasksTable, task.toMap(),
+        where: '$colId = ?', whereArgs: [task.id]);
     return result;
   }
 
 // Delete from db
-  Future <int> deleteTask(Task task) async {
+  Future<int> deleteTask(Task task) async {
     Database db = await this.db;
-    final int result = await db.update(tasksTable,task.toMap(),where: '$colId = ?', whereArgs: [task.id]);
+    final int result = await db.update(tasksTable, task.toMap(),
+        where: '$colId = ?', whereArgs: [task.id]);
     return result;
   }
 }
