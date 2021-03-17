@@ -15,12 +15,12 @@ class Task {
     };
   }
 
-  factory Task.fromMap(Map<String, dynamic> map) {
-    return Task.withId(
-      id: map['id'],
-      title: map['title'],
-      description: map['description'],
-      date: DateTime.parse(map['date']),
-    );
-  }
+  // factory Task.fromMap(Map<String, dynamic> map) {
+  //   return Task.withId(
+  //     id: map['id'],
+  //     title: map['title'],
+  //     description: map['description'],
+  //     date: DateTime.parse(map['date']),
+  //   );
+  // }
 }

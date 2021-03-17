@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_notepad/helpers/database.dart';
 
 class AddTask extends StatefulWidget {
   @override
@@ -33,13 +34,21 @@ class _AddTaskState extends State<AddTask> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           FlatButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
-                                print(title);
-                                print(description);
-                                print(date);
-                                Navigator.pop(context);
+                                int i =
+                                    await DatabaseHelper.instance.insertTask({
+                                  DatabaseHelper.colTitle: title,
+                                  DatabaseHelper.colDescription: description,
+                                });
+
+                                print('inserted id is $i');
+
+                                // print(title);
+                                // print(description);
+                                // print(date);
+                                // Navigator.pop(context);
                               }
                             },
                             child: Text(
