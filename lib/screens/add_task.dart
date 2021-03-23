@@ -43,12 +43,12 @@ class _AddTaskState extends State<AddTask> {
                                   DatabaseHelper.colDescription: description,
                                 });
 
-                                print('inserted id is $i');
+                                // print('inserted id is $i');
 
                                 // print(title);
                                 // print(description);
                                 // print(date);
-                                // Navigator.pop(context);
+                                Navigator.pop(context);
                               }
                             },
                             child: Text(
