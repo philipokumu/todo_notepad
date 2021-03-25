@@ -11,21 +11,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<Task> taskList = new List();
 
-  @override
-  void initState() {
-    super.initState();
-
-    DatabaseHelper.instance.queryAll().then((value) {
-      setState(() {
-        value.forEach((element) {
-          taskList.add(Task(id: element['id'], title: element["title"]));
-        });
-      });
-    }).catchError((error) {
-      print(error);
-    });
-  }
-
   //Items to be listed
   final items = List<String>.generate(100, (i) => "Item $i");
   // final List<Map<String,dynamic>> items = DatabaseHelper.instance.queryAll();
@@ -43,27 +28,31 @@ class _HomeState extends State<Home> {
         backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
       ),
-      body: ListView.builder(
-        itemCount: taskList.length,
-        itemBuilder: (context, index) {
-          if (index == taskList.length) return null;
-          return Column(
-            children: [
-              //Single item listed. Declared at the top
-              ListTile(
-                title: Text(taskList[index].title),
-                subtitle: Text('uncategorized 4/2/2021'),
-                trailing: Checkbox(
-                  onChanged: (value) {},
-                  activeColor: Theme.of(context).primaryColor,
-                  value: false,
-                ),
-              ),
-              Divider()
-            ],
-          );
-        },
-      ),
+      body: FutureBuilder<List<Map>>(
+          future: DatabaseHelper.instance.queryAll(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return Text('Loading...');
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    //Single item listed. Declared at the top
+                    ListTile(
+                      title: Text(snapshot.data[index]['title']),
+                      subtitle: Text('uncategorized 4/2/2021'),
+                      trailing: Checkbox(
+                        onChanged: (value) {},
+                        activeColor: Theme.of(context).primaryColor,
+                        value: false,
+                      ),
+                    ),
+                    Divider()
+                  ],
+                );
+              },
+            );
+          }),
     );
   }
 }

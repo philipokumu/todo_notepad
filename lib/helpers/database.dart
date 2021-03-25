@@ -15,6 +15,7 @@ class DatabaseHelper {
   static final colId = 'id';
   static final colTitle = 'title';
   static final colDescription = 'description';
+  static final colDate = 'date';
 
   // Step 1: Get the db | Only make db if there is none
   Future<Database> get db async {
@@ -45,7 +46,9 @@ class DatabaseHelper {
     CREATE TABLE $tasksTable(
         $colId INTEGER PRIMARY KEY AUTOINCREMENT,
         $colTitle TEXT,
-        $colDescription TEXT)
+        $colDescription TEXT,
+        $colDate TEXT,
+        )
         ''');
   }
 

@@ -11,6 +11,7 @@ class _AddTaskState extends State<AddTask> {
   String title = '';
   String description = '';
   DateTime date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +42,7 @@ class _AddTaskState extends State<AddTask> {
                                     await DatabaseHelper.instance.insertTask({
                                   DatabaseHelper.colTitle: title,
                                   DatabaseHelper.colDescription: description,
+                                  DatabaseHelper.colDate: date,
                                 });
 
                                 // print('inserted id is $i');
